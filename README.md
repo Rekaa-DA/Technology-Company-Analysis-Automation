@@ -1,6 +1,6 @@
 # 🤖 GitHub Repository Data Automation using n8n
 
-## Workflow 
+## n8n Workflow 
 
 <img width="1652" height="700" alt="Workflow Screenshot" src="https://github.com/user-attachments/assets/997499eb-4a35-47c5-8e76-33a74698c2f3" />
 
