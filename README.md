@@ -73,7 +73,7 @@ Power BI Dashboard
 
 ---
 
-# 🐍 Phase 1 – GitHub API Data Collection (Python)
+# GitHub API Data Collection (Python)
 
 Python was used to connect to the GitHub REST API and collect repository information from multiple technology companies.
 
@@ -97,7 +97,7 @@ Python was used to connect to the GitHub REST API and collect repository informa
 
 ---
 
-# 🧹 Phase 2 – Data Cleaning (Python)
+# Data Cleaning (Python)
 
 Python was used to prepare the raw dataset before automation.
 
@@ -121,7 +121,7 @@ Python was used to prepare the raw dataset before automation.
 
 ---
 
-# 🗄️ Phase 3 – SQL Database
+# SQL Database
 
 MySQL was used as the structured storage layer.
 
@@ -145,7 +145,7 @@ SELECT COUNT(*) FROM github_repositories;
 
 ---
 
-# 🔄 Phase 4 – Automation using n8n
+# Automation using n8n
 
 The automation workflow was built using n8n.
 
@@ -160,7 +160,7 @@ The automation workflow was built using n8n.
 
 ---
 
-# ☁️ Phase 5 – Google Sheets Storage
+# Google Sheets Storage
 
 Google Sheets acts as the cloud storage layer.
 
@@ -172,7 +172,7 @@ The workflow automatically:
 
 ---
 
-# 📊 Phase 6 – Power BI Dashboard
+#  Power BI Dashboard
 
 Power BI is connected to Google Sheets.
 
@@ -186,7 +186,7 @@ Whenever the n8n workflow executes:
 
 ---
 
-# 📊 Dashboard Features
+# Dashboard Features
 
 - Total Repositories
 - Total Stars
@@ -201,7 +201,7 @@ Whenever the n8n workflow executes:
 
 ---
 
-# ⚡ Key Features
+# Key Features
 
 - GitHub API Integration
 - Python Data Collection
@@ -214,7 +214,7 @@ Whenever the n8n workflow executes:
 
 ---
 
-# 📈 Results
+# Results
 
 - Automated GitHub repository collection
 - Cleaned and standardized repository data
@@ -226,7 +226,7 @@ Whenever the n8n workflow executes:
 
 ---
 
-# 🔮 Future Enhancements
+# Future Enhancements
 
 - Cloud MySQL Integration
 - Email Notifications
@@ -237,7 +237,7 @@ Whenever the n8n workflow executes:
 
 ---
 
-# 🛠️ Tools Used
+# Tools Used
 
 - Python
 - GitHub REST API
