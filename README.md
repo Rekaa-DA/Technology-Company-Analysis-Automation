@@ -1,55 +1,57 @@
-# 🌐 API Data Collection
+# 🗄️ SQL Database
 
-## Objective
+## 📌 Project Summary
 
-Collect GitHub repository data from leading technology companies using the GitHub REST API.
+This phase focuses on storing the cleaned GitHub repository dataset into MySQL.
 
-## Data Source
+The cleaned dataset generated from Python was imported into the `github_repositories` table using SQL INSERT statements, creating a structured database layer for further analysis and reporting.
 
-- GitHub REST API
-- https://api.github.com
+---
 
-## Technology Used
+## 🎯 Objectives
 
-- Python
-- Requests Library
-- JSON
-- GitHub API
+- Store cleaned GitHub repository data in MySQL
+- Organize repository information in a structured table
+- Prepare the dataset for Power BI reporting
+- Build a database layer for future automation
 
-## Companies Collected
+---
 
-- Microsoft
-- Google
-- Oracle
-- IBM
-- SAP
-- Salesforce
-- Snowflake
-- SAS
+## 🛠️ Tools Used
 
-## Data Collected
+- MySQL 8.0
+- MySQL Workbench
 
-The following repository information was collected:
+---
 
-- Company
-- Repository Name
-- Programming Language
-- Stars
-- Forks
-- Watchers
-- Open Issues
-- Repository Size
-- License
-- Archived Status
-- Created Date
-- Updated Date
-- Repository URL
+## 📂 SQL Operations Performed
 
-## Output
+- Imported cleaned GitHub repository dataset
+- Inserted repository records into the `github_repositories` table
+- Stored repository information including:
+  - Company
+  - Repository Name
+  - Programming Language
+  - Stars
+  - Forks
+  - Watchers
+  - Open Issues
+  - Repository Size
+  - License
+  - Archived Status
+  - Created Date
+  - Updated Date
+  - Repository URL
 
-The collected data was exported as a raw dataset for further data cleaning and analysis.
+---
 
-## Files
+## 📁 Files Included
 
-- githubcode.py
-- github_raw_dataset.csv 
+- github_repositories.sql
+- README.md
+
+---
+
+## ✅ Outcome
+
+The cleaned GitHub repository dataset was successfully stored in MySQL, providing a structured database layer for Power BI dashboard development and future automation.
