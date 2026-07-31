@@ -1,0 +1,746 @@
+{
+  "name": "GitHub Repository Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -400,
+        -192
+      ],
+      "id": "c60f9ca9-6f74-45e6-bc9e-2b1f41194a6c",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  { json: { company: \"Microsoft\", org: \"microsoft\" } },\n  { json: { company: \"Google\", org: \"google\" } },\n  { json: { company: \"Oracle\", org: \"oracle\" } },\n  { json: { company: \"IBM\", org: \"ibm\" } },\n  { json: { company: \"SAP\", org: \"sap\" } },\n  { json: { company: \"Salesforce\", org: \"salesforce\" } },\n  { json: { company: \"Snowflake\", org: \"snowflake\" } },\n  { json: { company: \"SAS\", org: \"sas\" } }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        -192
+      ],
+      "id": "62433970-afc5-41fe-9e02-fb1841e9195a",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/orgs/{{$json.org}}/repos?per_page=100&page=1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -80,
+        -192
+      ],
+      "id": "fa17b4df-04dc-4699-af28-d1ef04458cb4",
+      "name": "HTTP Request",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const repo = item.json;\n\n  return {\n    json: {\n      company: repo.owner?.login || null,\n      repository_name: repo.name || null,\n      programming_language: repo.language || \"Unknown\",\n      stars: repo.stargazers_count || 0,\n      forks: repo.forks_count || 0,\n      watchers: repo.watchers_count || 0,\n      open_issues: repo.open_issues_count || 0,\n      repository_size_kb: repo.size || 0,\n      license: repo.license?.name || \"No License\",\n      archived: repo.archived ? \"Archived\" : \"Active\",\n      created_date: repo.created_at || null,\n      updated_date: repo.updated_at || null,\n      repository_url: repo.html_url || null\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        -208
+      ],
+      "id": "df69c373-aaa2-4889-bd3b-43c09409234a",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M",
+          "mode": "list",
+          "cachedResultName": "GitHub_Automated_Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_name",
+              "displayName": "repository_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "programming_language",
+              "displayName": "programming_language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "stars",
+              "displayName": "stars",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "forks",
+              "displayName": "forks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "watchers",
+              "displayName": "watchers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "open_issues",
+              "displayName": "open_issues",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_size_kb",
+              "displayName": "repository_size_kb",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "license",
+              "displayName": "license",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archived",
+              "displayName": "archived",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_date",
+              "displayName": "created_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updated_date",
+              "displayName": "updated_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_url",
+              "displayName": "repository_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        -208
+      ],
+      "id": "85a9f683-e38b-4be1-bf58-d44866d3ab41",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AI6K9gAJ3Q0c87zv",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const seen = new Set();\n\nreturn items.filter(item => {\n  const url = item.json.repository_url;\n\n  if (seen.has(url)) {\n    return false;\n  }\n\n  seen.add(url);\n  return true;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        64
+      ],
+      "id": "1cb11f7b-8db1-4d00-af21-f92ea5214150",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M",
+          "mode": "list",
+          "cachedResultName": "GitHub_Automated_Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_name",
+              "displayName": "repository_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "programming_language",
+              "displayName": "programming_language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "stars",
+              "displayName": "stars",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "forks",
+              "displayName": "forks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "watchers",
+              "displayName": "watchers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "open_issues",
+              "displayName": "open_issues",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_size_kb",
+              "displayName": "repository_size_kb",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "license",
+              "displayName": "license",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archived",
+              "displayName": "archived",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_date",
+              "displayName": "created_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updated_date",
+              "displayName": "updated_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_url",
+              "displayName": "repository_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        32,
+        64
+      ],
+      "id": "cf4290a2-26ed-48d4-81c4-8b2ffcd19688",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AI6K9gAJ3Q0c87zv",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst requiredColumns = [\n  \"company\",\n  \"repository_name\",\n  \"programming_language\",\n  \"stars\",\n  \"forks\",\n  \"watchers\",\n  \"open_issues\",\n  \"repository_size_kb\",\n  \"license\",\n  \"archived\",\n  \"created_date\",\n  \"updated_date\",\n  \"repository_url\"\n];\n\nconst seen = new Set();\nconst cleanedData = [];\n\nfor (const item of items) {\n\n  const row = item.json;\n\n  const cleanRow = {\n    company: row.company || \"\",\n    repository_name: row.repository_name || \"\",\n    programming_language: row.programming_language || \"Unknown\",\n    stars: Number(row.stars) || 0,\n    forks: Number(row.forks) || 0,\n    watchers: Number(row.watchers) || 0,\n    open_issues: Number(row.open_issues) || 0,\n    repository_size_kb: Number(row.repository_size_kb) || 0,\n    license: row.license || \"No License\",\n    archived: row.archived,\n    created_date: row.created_date || \"\",\n    updated_date: row.updated_date || \"\",\n    repository_url: row.repository_url || \"\"\n  };\n\n  // Convert archived status\n  if (\n    cleanRow.archived === true ||\n    String(cleanRow.archived).toLowerCase() === \"true\" ||\n    String(cleanRow.archived).toLowerCase() === \"archived\"\n  ) {\n    cleanRow.archived = 1;\n  } else {\n    cleanRow.archived = 0;\n  }\n\n  // Remove duplicate repositories\n  const duplicateKey =\n    `${cleanRow.company}_${cleanRow.repository_name}`;\n\n  if (!seen.has(duplicateKey)) {\n\n    seen.add(duplicateKey);\n\n    cleanedData.push({\n      json: cleanRow\n    });\n  }\n}\n\nreturn cleanedData;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        -208
+      ],
+      "id": "3db4ad2f-2f40-4c9a-97b9-c0af9e593bf9",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M",
+          "mode": "list",
+          "cachedResultName": "GitHub_Automated_Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GVbuVFtNpaLdB5uf8JopN1rc_6BUEkoQKXXi_RZBY2M/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_name",
+              "displayName": "repository_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "programming_language",
+              "displayName": "programming_language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "stars",
+              "displayName": "stars",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "forks",
+              "displayName": "forks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "watchers",
+              "displayName": "watchers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "open_issues",
+              "displayName": "open_issues",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_size_kb",
+              "displayName": "repository_size_kb",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "license",
+              "displayName": "license",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archived",
+              "displayName": "archived",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_date",
+              "displayName": "created_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updated_date",
+              "displayName": "updated_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repository_url",
+              "displayName": "repository_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        544,
+        80
+      ],
+      "id": "7aeb086a-3813-449c-b74c-e4c462ea9b4c",
+      "name": "Append row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AI6K9gAJ3Q0c87zv",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "selvarajrekaa@gmail.com",
+        "subject": "GitHub Data Automation Completed",
+        "message": "GitHub data collection and Google Sheets update completed successfully.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        80
+      ],
+      "id": "d120b08c-bf4a-478f-a037-623ee9581cb0",
+      "name": "Send a message",
+      "webhookId": "05988be5-cb43-4e5c-a280-62d183665d43",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "JbMKWA6DcBmIjvyJ",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "b61869cf-c215-4e82-8b70-354f0756c920",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d4d843538d1de1743ff0f1afcc64dbb79b9a123f1858ef40a58cc80a29e3d396"
+  },
+  "nodeGroups": [],
+  "id": "R6jpPlfSyzg7udh3",
+  "tags": []
+}
