@@ -2,11 +2,8 @@
 
 ## 📊 Workflow Preview
 
-> *(Add your n8n Workflow Screenshot here)*
+<img width="1267" height="592" alt="Workflow_Screenshot" src="https://github.com/user-attachments/assets/90adfc11-95dd-41e0-abda-2f523f3b224f" />
 
-<img width="1000" alt="Workflow Screenshot" src="YOUR_WORKFLOW_SCREENSHOT_LINK_HERE"/>
-
----
 
 # 📌 Project Summary
 
@@ -71,9 +68,8 @@ The updated Google Sheets dataset is then used as the data source for the Power 
 
 # 📊 Workflow Output
 
-> *(Add your Execution Screenshot here)*
+<img width="1577" height="704" alt="Workflow Execution Screenshot" src="https://github.com/user-attachments/assets/e1a5fb4b-2edf-44a1-b9c0-e2c218631736" />
 
-<img width="1000" alt="Execution Screenshot" src="YOUR_EXECUTION_SCREENSHOT_LINK_HERE"/>
 
 ### Output
 
